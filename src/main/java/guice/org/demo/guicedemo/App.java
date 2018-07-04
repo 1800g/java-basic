@@ -1,7 +1,6 @@
 package guice.org.demo.guicedemo;
 
 import com.google.inject.Guice;
-import guice.org.demo.helloworlddemo.StringWritingApplet;
 
 public class App {
 
@@ -13,7 +12,9 @@ public class App {
      * @param args
      */
     public static void main(String[] args) {
-        MyApplet mainApplet = Guice.createInjector(new MainModule()).getInstance(MyApplet.class);
+        MyApplet mainApplet = Guice.createInjector(
+                new MainModule(),new CommandLineModule(args))
+                .getInstance(MyApplet.class);
         mainApplet.run();
     }
 

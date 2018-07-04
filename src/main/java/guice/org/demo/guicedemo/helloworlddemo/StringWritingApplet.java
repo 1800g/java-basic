@@ -1,4 +1,4 @@
-package guice.org.demo.helloworlddemo;
+package guice.org.demo.guicedemo.helloworlddemo;
 
 import guice.org.demo.guicedemo.MyApplet;
 

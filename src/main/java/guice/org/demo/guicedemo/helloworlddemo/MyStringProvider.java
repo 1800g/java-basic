@@ -1,8 +1,6 @@
-package guice.org.demo.helloworlddemo;
+package guice.org.demo.guicedemo.helloworlddemo;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Provides;
 
 public class MyStringProvider implements Provider<String> {
     @Override
