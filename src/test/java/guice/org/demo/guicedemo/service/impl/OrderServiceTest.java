@@ -3,18 +3,15 @@ package guice.org.demo.guicedemo.service.impl;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Module;
 import com.google.inject.util.Modules;
 import guice.org.demo.guicedemo.service.OrderService;
 import guice.org.demo.guicedemo.service.PriceService;
-import guice.org.demo.guicedemo.service.impl.ServerModule;
-import org.junit.Test;
 import org.junit.Before;
-import org.junit.After;
+import org.junit.Test;
 
-import javax.inject.Named;
-import java.util.List;
 import java.util.Set;
+
+import static org.junit.Assert.*;
 
 /**
  * OrderServiceImpl Tester.
@@ -28,7 +25,7 @@ class PriceServiceMock extends PriceServiceImpl {
 
     @Inject
     public PriceServiceMock(Set<String> supportedCurrencies) {
-        super(supportedCurrencies);
+        super(supportedCurrencies,null);
     }
 
     @Override
@@ -55,11 +52,17 @@ public class OrderServiceTest {
 
     @Test
     public void testSendToPayment() {
-        orderService.sendToPayment(789L);
+        try {
+            orderService.sendToPayment(789L);
+            fail("Exception expected");
+        } catch (Exception e) {
+            assertTrue(e.getMessage().contains("Price=567"));
+            assertTrue(e.getMessage().contains("OrdersPaid=1"));
+        }
     }
 
     @Test
     public void testSupportedCurrencies() {
-        throw new RuntimeException(priceService.getSupportedCurrencies().toString());
+        assertEquals("[CNY, EUR, USD]",priceService.getSupportedCurrencies().toString());
     }
 } 

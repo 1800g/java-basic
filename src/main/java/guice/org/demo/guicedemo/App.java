@@ -1,6 +1,7 @@
 package guice.org.demo.guicedemo;
 
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 public class App {
 
@@ -12,10 +13,8 @@ public class App {
      * @param args
      */
     public static void main(String[] args) {
-        MyApplet mainApplet = Guice.createInjector(
-                new MainModule(),new CommandLineModule(args))
-                .getInstance(MyApplet.class);
-        mainApplet.run();
+        Injector injector = Guice.createInjector(new MainModule(), new CommandLineModule(args));
+        Applets.get(injector,args[0]).run();
     }
 
 

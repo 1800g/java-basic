@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
         this.sessionManager = sessionManager;
     }
 
-    @Override
+    @Override @Logged
     public void sendToPayment(long orderId){
         //TODO:send to payment
         long price = priceServiceProvider.get().getPrice(orderId);
@@ -30,6 +30,6 @@ public class OrderServiceImpl implements OrderService {
         ordersPaid = ordersPaid + 1;
         throw new RuntimeException("Price="+price
                 +". SessionId="+sessionManager.getSessionId()
-                +". ordersPaid="+ ordersPaid);
+                +". OrdersPaid="+ ordersPaid);
     }
 }

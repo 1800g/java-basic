@@ -18,6 +18,6 @@ public class CommandLineModule extends AbstractModule {
     }
 
     @Provides @Args List<String> getCommandLineArgs(){
-        return Arrays.asList(args);
+        return Arrays.asList(args).subList(1,args.length);
     }
 }

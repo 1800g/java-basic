@@ -3,6 +3,7 @@ package guice.org.demo.guicedemo.helloworlddemo;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Names;
+import guice.org.demo.guicedemo.Applets;
 import guice.org.demo.guicedemo.Args;
 import guice.org.demo.guicedemo.MyApplet;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class HelloWorldModule extends AbstractModule {
     @Override
     protected void configure() {
+        Applets.register(binder()).named("hello").to(StringWritingApplet.class);
         bind(MyApplet.class).annotatedWith(Names.named("hello")).to(StringWritingApplet.class);
         bind(MyDestination.class).to(PrintStreamWriter.class);
         bind(PrintStream.class).toInstance(System.out);
